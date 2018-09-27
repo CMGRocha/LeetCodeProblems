@@ -1,22 +1,29 @@
-package com.leetcode.fizzBuzz;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.leetcode.smallestrange1;
 
 public class Solution {
-    public List<String> fizzBuzz(int n) {
-        List<String> result = new ArrayList<>();
-        for (int x = 1; x <= n; x++) {
-            if (x % 3 == 0 && x % 5 == 0) {
-                result.add("FizzBuzz");
-            } else if (x % 3 == 0) {
-                result.add("Fizz");
-            } else if (x % 5 == 0) {
-                result.add("Buzz");
-            } else {
-                result.add(x + "");
+    public int smallestRangeI_MyAnswer(int[] array, int k) {
+        int minValue = Integer.MAX_VALUE;
+        int maxValue = Integer.MIN_VALUE;
+
+        for (int x = 0; x < array.length; x++) {
+            if (array[x] - k > maxValue) {
+                maxValue = array[x] - k;
+            }
+
+            if (array[x] + k < minValue) {
+                minValue = array[x] + k;
             }
         }
-        return result;
+        return maxValue - minValue;
+    }
+
+    // solution checked
+    public int smallestRangeI(int[] A, int K) {
+        int min = A[0], max = A[0];
+        for (int x : A) {
+            min = Math.min(min, x);
+            max = Math.max(max, x);
+        }
+        return Math.max(0, max - min - 2 * K);
     }
 }
