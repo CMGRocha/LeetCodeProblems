@@ -15,12 +15,10 @@ public class Solution {
         for (Character stone : stones.toCharArray()) {
             if (map.containsKey(stone)) {
                 map.put(stone, map.get(stone) + 1);
-                //result++;
+                result++;
             }
         }
-        for (Character key : map.keySet()) {
-            result += map.get(key);
-        }
+
         return result;
     }
 }
