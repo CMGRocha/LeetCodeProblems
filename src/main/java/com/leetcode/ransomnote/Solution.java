@@ -7,20 +7,14 @@ public class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         Map<Character, Integer> availableLetters = new HashMap<>();
         for (Character letter : magazine.toCharArray()) {
-            if (availableLetters.containsKey(letter)) {
-                availableLetters.put(letter, availableLetters.get(letter) + 1);
-            } else {
-                availableLetters.put(letter, 1);
-            }
+            availableLetters.put(letter, availableLetters.getOrDefault(letter, 0) + 1);
         }
         for (Character letter : ransomNote.toCharArray()) {
-            if (!availableLetters.containsKey(letter)) {
+            int newCount = availableLetters.getOrDefault(letter, 0) - 1;
+            if (newCount < 0) {
                 return false;
             }
-            if (availableLetters.get(letter) < 1) {
-                return false;
-            }
-            availableLetters.put(letter, availableLetters.get(letter) - 1);
+            availableLetters.put(letter, newCount);
         }
 
         return true;
